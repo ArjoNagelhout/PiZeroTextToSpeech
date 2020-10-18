@@ -59,7 +59,7 @@ def convert_image_to_audio():
     print("Step 7: Read string to speak from file "+string_to_speak)
 
     # Step 8: Speak string
-    speak(string_to_speak)
+    speak("This is a piece of text")
     print("Step 8: Spoke string")
 
 
