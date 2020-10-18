@@ -3,15 +3,12 @@ from datetime import datetime
 from picamera import PiCamera
 import RPi.GPIO as GPIO
 
-# Picture dimensions
-width = 600
-height = 600
-
 # Pictures directory
 directory_string = "/home/pi/pictures/"
 
 # Initialize camera
 camera = PiCamera()
+#camera.resolution = (600, 600)
 
 # Set pin modes for GPIO
 GPIO.setmode(GPIO.BCM)
@@ -46,6 +43,7 @@ def convert_image_to_audio():
 
     # Step 5: Post-process the image using imagemagick
     output_string_postprocessed = directory_string + datetime_string + "-postprocessed.jpg"
+    subprocess.run(['convert '+output_string+' -monochrome '+output_string_postprocessed])
     print("Step 5: Post-processed image "+output_string_postprocessed)
 
     # Step 6: Use Tesseract    
