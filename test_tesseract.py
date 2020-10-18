@@ -69,7 +69,7 @@ def speak(input_string):
     # https://www.dexterindustries.com/howto/make-your-raspberry-pi-speak/
     # https://github.com/DexterInd/Raspberry_Pi_Speech/blob/master/speak_text.py
     
-    input_string = re.sub(r'\W+', '', input_string)
+    #input_string = re.sub(r'\W+', '', input_string)
     input_string = input_string.replace('\'', '')
     input_string = input_string.replace('"', '')
     input_string = input_string.replace(' ', '_')
