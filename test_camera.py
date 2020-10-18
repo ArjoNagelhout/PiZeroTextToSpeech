@@ -7,5 +7,9 @@ height = 600
 datetime_string = datetime.today().strftime('%Y-%m-%d-%H%M%S')
 print(datetime_string)
 output_string = "/home/pi/pictures/" + datetime_string + ".jpg"
-take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height), "-t", "0"], stdout=subprocess.PIPE)
+take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height), "-t", "0"], shell=True)
 print("taken picture" + output_string)
+
+string_to_speak = "Hello my friend. I am currently talking to you."
+
+speaking_subprocess = subprocess.run(["espeak", string_to_speak, "--stdout", "|", "aplay"])
