@@ -2,6 +2,7 @@ import subprocess
 from datetime import datetime
 from picamera import PiCamera
 import RPi.GPIO as GPIO
+import re
 
 # Pictures directory
 directory_string = "/home/pi/pictures/"
@@ -59,7 +60,7 @@ def convert_image_to_audio():
     print("Step 7: Read string to speak from file "+string_to_speak)
 
     # Step 8: Speak string
-    speak("This is a piece of text")
+    speak(string_to_speak)
     print("Step 8: Spoke string")
 
 
@@ -68,6 +69,7 @@ def speak(input_string):
     # https://www.dexterindustries.com/howto/make-your-raspberry-pi-speak/
     # https://github.com/DexterInd/Raspberry_Pi_Speech/blob/master/speak_text.py
     
+    input_string = re.sub(r'\W+', '', input_string)
     input_string = input_string.replace('\'', '')
     input_string = input_string.replace('"', '')
     input_string = input_string.replace(' ', '_')
