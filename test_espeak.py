@@ -1,6 +1,6 @@
 import subprocess
 
-string_to_speak = 'Welcome to the new things here, it is awesome isn\'t it?'
+string_to_speak = 'Welcome to the new things here, it is awesome isnt it?'
 
 
 
