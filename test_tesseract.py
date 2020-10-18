@@ -21,8 +21,9 @@ print("LED on")
 GPIO.output(24,GPIO.HIGH)
 
 # Take picture
-take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height)], shell=True)
-print("taken picture" + output_string)
+#take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height)], "-t", "0", shell=True)
+take_picture = subprocess.run(["raspistill -o "+output_string+" -w 600 -h 600 -t 0"], shell=True)
+print("taken picture " + output_string)
 
 # Turn led off
 GPIO.output(24,GPIO.LOW)
