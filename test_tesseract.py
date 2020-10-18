@@ -56,7 +56,7 @@ def convert_image_to_audio():
     string_to_speak = ""
     with open(output_string_tesseract, 'r') as file:
         string_to_speak = file.read()
-    print("Step 7: Read string to speak from file "+output_string_tesseract)
+    print("Step 7: Read string to speak from file "+string_to_speak)
 
     # Step 8: Speak string
     speak(string_to_speak)
