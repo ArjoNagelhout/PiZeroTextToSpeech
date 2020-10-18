@@ -46,14 +46,21 @@ def convert_image_to_audio():
     subprocess.run(['convert', output_string, '-monochrome', output_string_postprocessed])
     print("Step 5: Post-processed image "+output_string_postprocessed)
 
-    # Step 6: Use Tesseract    
-    output_string_tesseract = directory_string + datetime_string + "-tesseract.txt"
+    # Step 6: Use Tesseract
+    output_string_tesseract = directory_string + datetime_string + "-tesseract"
+    subprocess.run(['tesseract', output_string_postprocessed, output_string_tesseract])
+    output_string_tesseract = output_string_tesseract+".txt"
     print("Step 6: Performed tesseract conversion "+output_string_tesseract)
 
     # Step 7: Get string from file
+    string_to_speak = ""
+    with open(output_string_tesseract, 'r') as file:
+        string_to_speak = file.read()
+    print("Step 7: Read string to speak from file "+output_string_tesseract)
 
     # Step 8: Speak string
-    speak("Speak string")
+    speak(string_to_speak)
+    print("Step 8: Spoke string")
 
 
 # Function that takes an input string and automatically speaks it using espeak and aplay
