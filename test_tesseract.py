@@ -68,3 +68,8 @@ def speak(input_string):
     input_string = input_string.replace(' ', '_')
     subprocess.run(['espeak -s 120 --stdout > /home/pi/speak.wav '+input_string], shell=True)
     subprocess.run(["aplay /home/pi/speak.wav"], shell=True)
+
+
+# Run the main thread
+if __name__ == "__main__":
+    convert_image_to_audio()
