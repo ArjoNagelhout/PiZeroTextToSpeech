@@ -12,10 +12,6 @@ GPIO.setwarnings(False)
 GPIO.setup(24,GPIO.OUT)
 
 
-
-
-
-
 datetime_string = datetime.today().strftime('%Y-%m-%d-%H%M%S')
 print(datetime_string)
 output_string = "/home/pi/pictures/" + datetime_string + ".jpg"
@@ -25,7 +21,7 @@ print("LED on")
 GPIO.output(24,GPIO.HIGH)
 
 # Take picture
-take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height), "-t", "0"], shell=True)
+take_picture = subprocess.run(["raspistill", "-o", output_string, "-w", str(width), "-h", str(height)], shell=True)
 print("taken picture" + output_string)
 
 # Turn led off
