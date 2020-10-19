@@ -2,7 +2,6 @@ import subprocess
 from datetime import datetime
 from picamera import PiCamera
 import RPi.GPIO as GPIO
-import re
 
 # Pictures directory
 directory_string = "/home/pi/pictures/"
@@ -12,9 +11,17 @@ camera = PiCamera()
 #camera.resolution = (600, 600)
 
 # Set pin modes for GPIO
+led_pin = 24
+button_pin = 23
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(24,GPIO.OUT)
+
+# LED
+GPIO.setup(led_pin,GPIO.OUT)
+
+# BUTTON
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 # Function that takes a picture, post-processes it, uses tesseract to convert it to text and converts that to audio using espeak. 
@@ -24,7 +31,7 @@ def convert_image_to_audio():
     print("Step 1: Datetime string "+datetime_string)
 
     # Step 2: Turn the LED on
-    GPIO.output(24,GPIO.HIGH)
+    GPIO.output(led_pin,GPIO.HIGH)
     print("Step 2: LED on")
 
     # Step 3: Take the picture
@@ -39,7 +46,7 @@ def convert_image_to_audio():
     print("Step 3: Taken picture " + output_string)
 
     # Step 4: Turn the LED off
-    GPIO.output(24,GPIO.LOW)
+    GPIO.output(led_pin,GPIO.LOW)
     print("Step 4: LED off")
 
     # Step 5: Post-process the image using imagemagick
@@ -80,4 +87,7 @@ def speak(input_string):
 
 # Run the main thread
 if __name__ == "__main__":
-    convert_image_to_audio()
+    while True:
+        button_state = GPIO.input(button_pin)
+        if button_state == True:
+            convert_image_to_audio()
