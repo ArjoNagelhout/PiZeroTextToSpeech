@@ -89,5 +89,5 @@ def speak(input_string):
 if __name__ == "__main__":
     while True:
         button_state = GPIO.input(button_pin)
-        if button_state == True:
+        if button_state == False:
             convert_image_to_audio()
