@@ -53,7 +53,7 @@ def convert_image_to_audio():
 
     # Step 5: Post-process the image using imagemagick
     output_string_postprocessed = directory_string + datetime_string + "-postprocessed.jpg"
-    subprocess.run(['convert', output_string, '-monochrome', output_string_postprocessed])
+    subprocess.run(['convert', output_string, '-threshold 50% ', output_string_postprocessed])
     print("Step 5: Post-processed image "+output_string_postprocessed)
 
     # Step 6: Use Tesseract
@@ -69,8 +69,12 @@ def convert_image_to_audio():
     print("Step 7: Read string to speak from file "+string_to_speak)
 
     # Step 8: Speak string
-    speak("Found text")
-    speak(string_to_speak)
+    if string_to_speak != "":
+        speak("Found text")
+        speak(string_to_speak)
+    else:
+        speak("Didn't find text")
+    
     print("Step 8: Spoke string")
 
 
