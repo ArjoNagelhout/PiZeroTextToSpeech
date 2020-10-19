@@ -26,6 +26,8 @@ GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Function that takes a picture, post-processes it, uses tesseract to convert it to text and converts that to audio using espeak. 
 def convert_image_to_audio():
+    speak("Capture image")
+
     # Step 1: Get datetime string
     datetime_string = datetime.today().strftime('%Y-%m-%d-%H%M%S')
     print("Step 1: Datetime string "+datetime_string)
@@ -88,7 +90,7 @@ def speak(input_string):
 
 # Run the main thread
 if __name__ == "__main__":
-    speak("I have started up. ")
+    speak("I have started up")
     while True:
         button_state = GPIO.input(button_pin)
         if button_state == False:
