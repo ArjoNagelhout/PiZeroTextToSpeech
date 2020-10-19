@@ -87,6 +87,7 @@ def speak(input_string):
 
 # Run the main thread
 if __name__ == "__main__":
+    speak("I have started up. ")
     while True:
         button_state = GPIO.input(button_pin)
         if button_state == False:
