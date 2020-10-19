@@ -72,10 +72,12 @@ def convert_image_to_audio():
     if string_to_speak != "":
         speak("Found text")
         speak(string_to_speak)
+        print("Step 8: Spoke string")
     else:
         speak("Didn't find text")
+        print("Step 8: Didn't find string")
     
-    print("Step 8: Spoke string")
+    
 
 
 # Function that takes an input string and automatically speaks it using espeak and aplay
