@@ -64,18 +64,18 @@ def convert_image_to_audio():
     string_to_speak = ""
     with open(output_string_tesseract, 'r') as file:
         string_to_speak = file.read()
-    print("Step 7: Read string to speak from file "+string_to_speak)
-
-    # Step 8: Speak string
     string_to_speak = string_to_speak.replace('\'', '')
     string_to_speak = string_to_speak.replace('"', '')
     string_to_speak = string_to_speak.replace('\n', '_')
     string_to_speak = string_to_speak.replace(' ', '_')
+    print("Step 7: Read string to speak from file "+string_to_speak)
+
+    # Step 8: Speak string
 
     if string_to_speak.replace('_', '') != "":
         speak("Found text")
         speak(string_to_speak)
-        print("Step 8: Spoke string")
+        print("Step 8: Spoke string: "+string_to_speak)
     else:
         speak("Didn't find text")
         print("Step 8: Didn't find string")
