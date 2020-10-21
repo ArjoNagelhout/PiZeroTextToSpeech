@@ -51,7 +51,7 @@ def convert_image_to_audio():
 
     # Step 5: Post-process the image using imagemagick
     output_string_postprocessed = directory_string + datetime_string + "-postprocessed.jpg"
-    subprocess.run(['convert', output_string, '-set', 'colorspace', 'Gray', '-separate', '-average', '-clahe', '80x80+64+2', '-brightness-contrast', '0X50', output_string_postprocessed])
+    subprocess.run(['convert', output_string, '-set', 'colorspace', 'Gray', '-separate', '-average', output_string_postprocessed])
     print("Step 5: Post-processed image "+output_string_postprocessed)
 
     # Step 6: Use Tesseract
