@@ -9,11 +9,9 @@ directory_string = "/home/pi/pictures/"
 # Initialize camera
 camera = PiCamera()
 #camera.resolution = (600, 600)
-
 # Set pin modes for GPIO
 led_pin = 24
 button_pin = 23
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
@@ -53,7 +51,7 @@ def convert_image_to_audio():
 
     # Step 5: Post-process the image using imagemagick
     output_string_postprocessed = directory_string + datetime_string + "-postprocessed.jpg"
-    subprocess.run(['convert', output_string, '-monochrome ', output_string_postprocessed])
+    subprocess.run(['convert', output_string, '-set', 'colorspace', 'Gray', '-separate', '-average', output_string_postprocessed])
     print("Step 5: Post-processed image "+output_string_postprocessed)
 
     # Step 6: Use Tesseract
@@ -69,7 +67,12 @@ def convert_image_to_audio():
     print("Step 7: Read string to speak from file "+string_to_speak)
 
     # Step 8: Speak string
-    if string_to_speak != "":
+    string_to_speak = string_to_speak.replace('\'', '')
+    string_to_speak = string_to_speak.replace('"', '')
+    string_to_speak = string_to_speak.replace('\n', '_')
+    string_to_speak = string_to_speak.replace(' ', '_')
+
+    if string_to_speak.replace('_', '') != "":
         speak("Found text")
         speak(string_to_speak)
         print("Step 8: Spoke string")
@@ -78,8 +81,6 @@ def convert_image_to_audio():
         print("Step 8: Didn't find string")
     
     
-
-
 # Function that takes an input string and automatically speaks it using espeak and aplay
 def speak(input_string):
     # https://www.dexterindustries.com/howto/make-your-raspberry-pi-speak/
