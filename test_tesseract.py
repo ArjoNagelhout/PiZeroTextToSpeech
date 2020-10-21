@@ -64,6 +64,7 @@ def convert_image_to_audio():
     string_to_speak = ""
     with open(output_string_tesseract, 'r') as file:
         string_to_speak = file.read()
+    print(string_to_speak)
     string_to_speak = string_to_speak.replace('\'', '')
     string_to_speak = string_to_speak.replace('"', '')
     string_to_speak = string_to_speak.replace('\n', '_')
